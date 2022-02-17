@@ -11,6 +11,9 @@ class Album extends Model
 
     protected $table = 'albumes';
 
+
+    public $fillable = ['titulo', 'autor'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -20,4 +23,5 @@ class Album extends Model
     {
         return $this->hasMany(Tema::class);
     }
+
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
+use App\Models\Album;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Principal
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Dashboard principal de usuarios autenticados
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+// rutas para el CRUD de albumes (index, create, store, show, edit, update y destroy)
+Route::resource('albumes', AlbumController::class)
+    ->parameters(['albumes' => 'album']);
 
 require __DIR__.'/auth.php';
