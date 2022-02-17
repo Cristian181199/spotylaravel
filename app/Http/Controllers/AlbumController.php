@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAlbumRequest;
 use App\Http\Requests\UpdateAlbumRequest;
 use App\Models\Album;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumController extends Controller
 {
@@ -15,7 +17,9 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        return view('albumes.index', [
+            'albumes' => Album::all(),
+        ]);
     }
 
     /**
@@ -25,7 +29,9 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        //
+        return view('albumes.create', [
+            'album' => new Album(),
+        ]);
     }
 
     /**
@@ -36,7 +42,21 @@ class AlbumController extends Controller
      */
     public function store(StoreAlbumRequest $request)
     {
-        //
+        $validados = $request->validated();
+        $album = new Album($validados);
+        $album->save();
+        $request->file('portada')->storeAs(
+            'portadas',
+            $album->id . '.jpg',
+            'local',
+        );
+        $img = Image::make(storage_path('app/portadas/' . $album->id . '.jpg'));
+        $img->resize(100, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save(public_path('storage/portadas/' . $album->id . '.jpg'));
+        Storage::disk('local')->delete('portadas/' . $album->id . '.jpg');
+        return redirect()->route('albumes.index')->with('success', '!Album creado con exito!');
     }
 
     /**

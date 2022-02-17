@@ -13,7 +13,7 @@ class StoreAlbumRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreAlbumRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'titulo' => 'required|string|max:255',
+            'portada' => 'required|image|mimes:jpg',
+            'autor' => 'required|string|max:255',
         ];
     }
 }
