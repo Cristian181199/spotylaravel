@@ -48,7 +48,10 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="text-sm text-gray-900">
-                            <button class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-indigo-600 rounded border border-indigo-700 text-indigo-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-700">Button</button>
+                            <a href="{{ route('albumes.edit', $album) }}" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-amber-600 rounded border border-amber-700 text-amber-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-amber-700">Editar</a>
+                        </div>
+                        <div class="text-sm text-gray-900">
+                            <button class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-red-600 rounded border border-red-700 text-red-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-red-700">Eliminar</button>
                         </div>
                     </td>
                 </tr>
@@ -56,6 +59,6 @@
         </tbody>
     </table>
     <div class="pt-4">
-        <a href="{{ route('albumes.create') }}">Crear nuevo album</a>
+        <a class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-indigo-600 rounded border border-indigo-700 text-indigo-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-700" href="{{ route('albumes.create') }}">Crear nuevo album</a>
     </div>
 </x-contenido>

@@ -78,7 +78,9 @@ class AlbumController extends Controller
      */
     public function edit(Album $album)
     {
-        //
+        return view('albumes.edit', [
+            'album' => $album,
+        ]);
     }
 
     /**
@@ -90,7 +92,28 @@ class AlbumController extends Controller
      */
     public function update(UpdateAlbumRequest $request, Album $album)
     {
-        //
+        $validados = $request->validated();
+        $album->titulo = $validados['titulo'];
+        $album->autor = $validados['autor'];
+        $album->save();
+
+        if ($request->file('portada')) {
+            $request->file('portada')->storeAs(
+                'portadas',
+                $album->id . '.jpg',
+                'local',
+            );
+
+            $img = Image::make(storage_path('app/portadas/' . $album->id . '.jpg'));
+            $img->resize(100, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save(public_path('storage/portadas/' . $album->id . '.jpg'));
+            Storage::disk('local')->delete('portadas/' . $album->id . '.jpg');
+        }
+
+        return redirect()->route('albumes.index')->with('success', '!Album editado con exito!');
+
     }
 
     /**
