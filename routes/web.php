@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\TemaController;
 use App\Models\Album;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,8 @@ Route::get('/dashboard', function () {
 // rutas para el CRUD de albumes (index, create, store, show, edit, update y destroy)
 Route::resource('albumes', AlbumController::class)
     ->parameters(['albumes' => 'album']);
+
+Route::resource('temas', TemaController::class)
+    ->parameters(['temas' => 'tema']);
 
 require __DIR__.'/auth.php';

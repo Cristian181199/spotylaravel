@@ -13,7 +13,7 @@ class StoreTemaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class StoreTemaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => 'required|string|max:255',
+            // Cuando haya que validar un regex, es mejor pasarlo en forma de array, ya que da problemas por que no encuentra el '/' final
+            'duracion' => ['required', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/'],
+            'album' => 'required|exists:albumes,id'
+        ];
+    }
+
+    // Aqui se puede editar los mensajes de error.
+    public function messages()
+    {
+        return [
+            'duracion.regex' => 'Tiene que estar en formato 00:00',
         ];
     }
 }
