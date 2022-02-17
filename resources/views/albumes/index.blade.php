@@ -3,6 +3,7 @@
         Albumes
     </x-slot>
     <x-success-message/>
+    <x-error-message/>
     <table>
         <thead class="bg-gray-50">
             <tr>
@@ -51,7 +52,11 @@
                             <a href="{{ route('albumes.edit', $album) }}" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-amber-600 rounded border border-amber-700 text-amber-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-amber-700">Editar</a>
                         </div>
                         <div class="text-sm text-gray-900">
-                            <button class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-red-600 rounded border border-red-700 text-red-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-red-700">Eliminar</button>
+                            <form action="{{ route('albumes.destroy', $album) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-red-600 rounded border border-red-700 text-red-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-red-700">Eliminar</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

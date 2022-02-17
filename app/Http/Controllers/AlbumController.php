@@ -124,6 +124,13 @@ class AlbumController extends Controller
      */
     public function destroy(Album $album)
     {
-        //
+
+        if ($album->temas->isNotEmpty()) {
+            return redirect()->route('albumes.index')->with('error', 'Este album tiene temas asociados.');
+        }
+
+        $album->delete();
+
+        return redirect()->route('albumes.index')->with('success', 'Album eliminado con exito.');
     }
 }
