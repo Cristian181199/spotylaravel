@@ -34,7 +34,9 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="text-sm text-gray-900">
-                            {{ $album->titulo }}
+                            <a class="hover:text-blue-600" href="{{ route('albumes.show', $album) }}">
+                                {{ $album->titulo }}
+                            </a>
                         </div>
                     </td>
                     <td class="px-6 py-4">
