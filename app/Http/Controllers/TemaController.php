@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTemaRequest;
 use App\Http\Requests\UpdateTemaRequest;
+use App\Models\Album;
 use App\Models\Tema;
 
 class TemaController extends Controller
@@ -15,7 +16,9 @@ class TemaController extends Controller
      */
     public function index()
     {
-        //
+        return view('temas.index', [
+            'temas' => Tema::all(),
+        ]);
     }
 
     /**
@@ -25,7 +28,10 @@ class TemaController extends Controller
      */
     public function create()
     {
-        //
+        return view('temas.create', [
+            'tema' => new Tema(),
+            'albumes' => Album::all(),
+        ]);
     }
 
     /**
@@ -36,7 +42,12 @@ class TemaController extends Controller
      */
     public function store(StoreTemaRequest $request)
     {
-        //
+        $validados = $request->validated();
+        $tema = new Tema($validados);
+        $tema->album_id = $validados['album'];
+        $tema->save();
+
+        return redirect()->route('temas.index')->with('success', '!Tema creado con exito!');
     }
 
     /**
@@ -47,7 +58,9 @@ class TemaController extends Controller
      */
     public function show(Tema $tema)
     {
-        //
+        return view('temas.show', [
+            'tema' => $tema,
+        ]);
     }
 
     /**
@@ -58,7 +71,10 @@ class TemaController extends Controller
      */
     public function edit(Tema $tema)
     {
-        //
+        return view('temas.edit', [
+            'tema' => $tema,
+            'albumes' => Album::all(),
+        ]);
     }
 
     /**
@@ -70,7 +86,13 @@ class TemaController extends Controller
      */
     public function update(UpdateTemaRequest $request, Tema $tema)
     {
-        //
+        $validados = $request->validated();
+        $tema->nombre = $validados['nombre'];
+        $tema->duracion = $validados['duracion'];
+        $tema->album_id = $validados['album'];
+        $tema->save();
+
+        return redirect()->route('temas.index')->with('success', '!Tema editado con exito!');
     }
 
     /**
@@ -81,6 +103,8 @@ class TemaController extends Controller
      */
     public function destroy(Tema $tema)
     {
-        //
+        $tema->delete();
+
+        return redirect()->route('temas.index')->with('success', 'Tema eliminado con exito.');
     }
 }

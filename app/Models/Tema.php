@@ -9,6 +9,8 @@ class Tema extends Model
 {
     use HasFactory;
 
+    public $fillable = ['nombre', 'duracion', 'album_id'];
+
     public function album()
     {
         return $this->belongsTo(Album::class);
