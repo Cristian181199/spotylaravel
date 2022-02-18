@@ -48,7 +48,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="text-sm text-gray-900">
-                            <a href="" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-amber-600 rounded border border-amber-700 text-amber-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-amber-700">Editar</a>
+                            <a href="{{ route('temas.edit', $tema) }}" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-amber-600 rounded border border-amber-700 text-amber-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-amber-700">Editar</a>
                         </div>
                         <div class="text-sm text-gray-900">
                             <form action="" method="POST">

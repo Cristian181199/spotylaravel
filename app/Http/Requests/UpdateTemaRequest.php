@@ -13,7 +13,7 @@ class UpdateTemaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class UpdateTemaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => 'required|string|max:255',
+            // Cuando haya que validar un regex, es mejor pasarlo en forma de array, ya que da problemas por que no encuentra el '/' final
+            'duracion' => ['required', 'regex:/^\d{2}:\d{2}:\d{2}$/'],
+            'album' => 'required|exists:albumes,id'
+        ];
+    }
+
+    // Aqui se puede editar los mensajes de error.
+    public function messages()
+    {
+        return [
+            'duracion.regex' => 'Tiene que estar en formato 00:00:00, H:M:S',
         ];
     }
 }

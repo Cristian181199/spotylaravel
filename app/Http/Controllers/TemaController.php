@@ -69,7 +69,10 @@ class TemaController extends Controller
      */
     public function edit(Tema $tema)
     {
-        //
+        return view('temas.edit', [
+            'tema' => $tema,
+            'albumes' => Album::all(),
+        ]);
     }
 
     /**
@@ -81,7 +84,13 @@ class TemaController extends Controller
      */
     public function update(UpdateTemaRequest $request, Tema $tema)
     {
-        //
+        $validados = $request->validated();
+        $tema->nombre = $validados['nombre'];
+        $tema->duracion = $validados['duracion'];
+        $tema->album_id = $validados['album'];
+        $tema->save();
+
+        return redirect()->route('temas.index')->with('success', '!Tema editado con exito!');
     }
 
     /**
