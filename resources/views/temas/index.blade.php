@@ -34,11 +34,11 @@
                         </div>
                     </td>
                     <td class="px-6 py-4">
+                        @php
+                            $duracion = new DateInterval($tema->duracion);
+                        @endphp
                         <div class="text-sm text-gray-900">
-                            {{ $tema->duracion }}
-                            @php
-                                echo gettype($tema->duracion);
-                            @endphp
+                            {{ $duracion->format('%H:%I:%S') . ' H:M:S'; }}
                         </div>
                     </td>
                     <td class="px-6 py-4">
