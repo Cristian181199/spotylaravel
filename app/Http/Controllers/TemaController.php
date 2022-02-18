@@ -58,7 +58,9 @@ class TemaController extends Controller
      */
     public function show(Tema $tema)
     {
-        //
+        return view('temas.show', [
+            'tema' => $tema,
+        ]);
     }
 
     /**
@@ -101,6 +103,8 @@ class TemaController extends Controller
      */
     public function destroy(Tema $tema)
     {
-        //
+        $tema->delete();
+
+        return redirect()->route('temas.index')->with('success', 'Tema eliminado con exito.');
     }
 }
