@@ -135,4 +135,9 @@ class AlbumController extends Controller
 
         return redirect()->route('albumes.index')->with('success', 'Album eliminado con exito.');
     }
+
+    public function descargar(Album $album)
+    {
+        return response()->download(public_path('storage/portadas/' . $album->id . '.jpg'));
+    }
 }

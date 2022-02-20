@@ -33,4 +33,7 @@ Route::resource('albumes', AlbumController::class)
 Route::resource('temas', TemaController::class)
     ->parameters(['temas' => 'tema']);
 
+Route::get('/albumes/{album}/descargar', [AlbumController::class, 'descargar'])
+    ->name('albumes-descargar');
+
 require __DIR__.'/auth.php';
