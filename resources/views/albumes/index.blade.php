@@ -46,7 +46,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="text-sm text-gray-900">
-                            <a>Descargar</a>
+                            <a href="{{ route('albumes-descargar', [$album]) }}" type="submit" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-cyan-300 rounded border border-cyan-300 text-cyan-300 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-cyan-300">Descargar</a>
                         </div>
                     </td>
                     <td class="px-6 py-4">
