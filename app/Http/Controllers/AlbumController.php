@@ -18,7 +18,7 @@ class AlbumController extends Controller
     public function index()
     {
         return view('albumes.index', [
-            'albumes' => Album::all(),
+            'albumes' => Album::with('temas')->get(),
         ]);
     }
 
