@@ -20,6 +20,9 @@
                     Numero de temas
                 </th>
                 <th class="px-6 py-2 text-xs text-gray-500">
+                    Duracion total
+                </th>
+                <th class="px-6 py-2 text-xs text-gray-500">
                     Descargar portada
                 </th>
                 <th class="px-6 py-2 text-xs text-gray-500">
@@ -50,6 +53,11 @@
                     <td class="px-6 py-4">
                         <div class="text-sm text-gray-900">
                             {{ $album->temas->count(); }}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-gray-900">
+                            {{ $album->temas()->sum('duracion'); }}
                         </div>
                     </td>
                     <td class="px-6 py-4">

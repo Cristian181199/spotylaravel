@@ -11,7 +11,6 @@ class Album extends Model
 
     protected $table = 'albumes';
 
-
     public $fillable = ['titulo', 'autor'];
 
     public function user()
