@@ -52,12 +52,19 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="text-sm text-gray-900">
-                            {{ $album->temas->count(); }}
+                            {{ $album->temas_count; }}
                         </div>
                     </td>
                     <td class="px-6 py-4">
                         <div class="text-sm text-gray-900">
-                            {{ $album->temas()->sum('duracion'); }}
+                            @php
+                                if ($album->temas_sum_duracion == null) {
+                                    $duracion = new DateInterval('PT00H00M00S');
+                                } else {
+                                    $duracion = new DateInterval($album->temas_sum_duracion);
+                                }
+                            @endphp
+                            {{ $duracion->format('%H:%I:%S') . ' H:M:S'; }}
                         </div>
                     </td>
                     <td class="px-6 py-4">
@@ -67,10 +74,10 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="text-sm text-gray-900">
-                            <a href="{{ route('albumes.edit', $album) }}" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-amber-600 rounded border border-amber-700 text-amber-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-amber-700">Editar</a>
+                            <a href="{{ route('albumes.edit', [$album]) }}" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-amber-600 rounded border border-amber-700 text-amber-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-amber-700">Editar</a>
                         </div>
                         <div class="text-sm text-gray-900">
-                            <form action="{{ route('albumes.destroy', $album) }}" method="POST">
+                            <form action="{{ route('albumes.destroy', [$album]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="mx-2 my-2 bg-white transition duration-150 ease-in-out hover:bg-gray-100 hover:text-red-600 rounded border border-red-700 text-red-700 px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-red-700">Eliminar</button>
