@@ -17,7 +17,7 @@ class TemaController extends Controller
     public function index()
     {
         return view('temas.index', [
-            'temas' => Tema::all(),
+            'temas' => Tema::with('album')->get(),
         ]);
     }
 
